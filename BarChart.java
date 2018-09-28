@@ -7,6 +7,7 @@ package reeption;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,15 +41,16 @@ public class BarChart extends JFrame{
         setContentPane(chartPanel2);
     }
      private CategoryDataset createDataset2(){
+         ResultSet r = db.chartData();
               try {
             //Male and Female Counter
-            while(db.chartData().next()){               
-                String gendersex = db.chartData().getString(1);
+            while(r.next()){               
+                String gendersex = r.getString(1);
                 if("Female".equals(gendersex))
                     females = females + 1;
                 if("Male".equals(gendersex))
                     males = males + 1;
-                String ages = db.chartData().getString(2);
+                String ages = r.getString(2);
                 age = Integer.valueOf(ages);
                 if(age <= 18)
                     ageBracket1 = ageBracket1 + 1;
@@ -59,7 +61,7 @@ public class BarChart extends JFrame{
                 if(age>35)
                     ageBracket4 = ageBracket4 + 1;
     }} catch (SQLException ex) {
-    Logger.getLogger(CreateChart.class.getName()).log(Level.SEVERE, null, ex);
+    Logger.getLogger(BarChart.class.getName()).log(Level.SEVERE, null, ex);
         }
         DefaultCategoryDataset res = new DefaultCategoryDataset();
         res.addValue(ageBracket1, "0 - 18","");
@@ -69,7 +71,7 @@ public class BarChart extends JFrame{
         return res;
     }
     private JFreeChart createBarChart(CategoryDataset data, String title){
-        JFreeChart chart2 = ChartFactory.createBarChart(title, "Bracket", "Number", data);
+        JFreeChart chart2 = ChartFactory.createBarChart(title, "Age Bracket", "Number", data);
         chart2.setBackgroundPaint(Color.WHITE);
         CategoryPlot plot2 = chart2.getCategoryPlot();
         plot2.setBackgroundPaint(Color.LIGHT_GRAY);
@@ -91,9 +93,9 @@ public class BarChart extends JFrame{
         return chart2;
     }
     public static void main(String[] args) {
-        BarChart cc = new BarChart("Age Distribution");
-        cc.pack();
-        RefineryUtilities.centerFrameOnScreen(cc);
-        cc.setVisible(true);
+        BarChart cx = new BarChart("Age Distribution");
+        cx.pack();
+        RefineryUtilities.centerFrameOnScreen(cx);
+        cx.setVisible(true);
     }
 }
