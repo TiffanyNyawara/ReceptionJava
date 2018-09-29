@@ -18,8 +18,8 @@ public class Reeption {
    static final String DB_URL = "jdbc:mysql://localhost/oopclass";
 
    //  Database credentials
-   static final String USER = "triad";
-   static final String PASS = "Tony0772780176";
+   static final String USER = "root";
+   static final String PASS = "";
    Statement statement;
    ResultSet rsx;
    public void ExecuteDB(String q){
