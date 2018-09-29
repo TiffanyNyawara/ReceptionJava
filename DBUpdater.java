@@ -19,8 +19,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class DBUpdater {
     String conString = "jdbc:mysql://localhost:3306/oopclass";
-    String username = "triad";
-    String password = "Tony0772780176";
+    String username = "root";
+    String password = "";
     ResultSet rsx;
     
     //INSERT INTO DB
